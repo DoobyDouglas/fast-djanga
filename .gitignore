@@ -165,6 +165,6 @@ schema/user.py
 router/
 crud/
 api/
+task/
 main.py
-alembic/
-alembic.ini
+redis.conf

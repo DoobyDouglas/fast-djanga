@@ -14,7 +14,7 @@ class MySQLSettings(SQLBase):
 
     @override
     def _get_url(self) -> str:
-        return f"{self.MYSQL_USER}:{self.MYSQL_PASSWORD}" f"@{self.MYSQL_HOST}/{self.MYSQL_DATABASE}"
+        return f"{self.MYSQL_USER}:{self.MYSQL_PASSWORD}@{self.MYSQL_HOST}/{self.MYSQL_DATABASE}"
 
 
 if __name__ == "__main__":

@@ -5,7 +5,8 @@ from fastapi import Request
 def get_database(
     request: Request,
 ) -> AsyncIOMotorDatabase:
-    return request.app._database
+    if request.app._database is not None:
+        return request.app._database
 
 
 if __name__ == "__main__":

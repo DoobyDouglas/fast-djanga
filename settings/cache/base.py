@@ -2,7 +2,8 @@ from settings.base import Base
 
 
 class CacheBase(Base):
-    pass
+    def _get_url(self) -> str:
+        raise NotImplementedError
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ from settings.base import Base
 class SQLBase(Base):
     name: str = ""
     driver: str = ""
+    echo: bool = False
 
     def _get_url(self) -> str:
         raise NotImplementedError

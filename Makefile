@@ -5,3 +5,5 @@ run:
 format:
 	ruff check
 	ruff format
+celery:
+	celery -A task.app:app worker -B -l info

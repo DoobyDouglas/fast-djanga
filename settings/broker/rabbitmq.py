@@ -1,3 +1,4 @@
+from overrides import override
 from settings.broker.base import BrokerBase
 
 
@@ -9,12 +10,17 @@ class RabbitMQSettings(BrokerBase):
     RABBITMQ_DEFAULT_VHOST: str
     RABBITMQ_BACKEND: str
 
-    def get_broker(self) -> str:
+    @override
+    def _get_url(self) -> str:
         return (
             f"amqp://{self.RABBITMQ_DEFAULT_USER}:"
             f"{self.RABBITMQ_DEFAULT_PASS}@"
-            f"{self.RABBITMQ_HOST}:{self.RABBITMQ_PORT}/"
-            f"{self.RABBITMQ_DEFAULT_VHOST}"
+            f"{self.RABBITMQ_HOST}:{self.RABBITMQ_PORT}"
+        )
+
+    def get_broker(self) -> str:
+        return (
+            f"{self._get_url()}/{self.RABBITMQ_DEFAULT_VHOST}"
         )
 
     def get_backend(self) -> str:

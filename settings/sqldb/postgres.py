@@ -14,7 +14,7 @@ class PostgresSettings(SQLBase):
 
     @override
     def _get_url(self) -> str:
-        return f"{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}" f"@{self.DB_HOST}/{self.POSTGRES_DB}"
+        return f"{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.DB_HOST}/{self.POSTGRES_DB}"
 
 
 if __name__ == "__main__":
