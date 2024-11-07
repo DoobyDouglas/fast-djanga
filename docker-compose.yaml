@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  random_postgres_db:
+    image: postgres:16.2
+    container_name: random_postgres_db
+    hostname: random_postgres_db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+  random_mysql_db:
+    image: mysql:8.3.0
+    container_name: random_mysql_db
+    hostname: random_mysql_db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_volume:/var/lib/mysql
+
+  random_mongo_db:
+    image: mongo:7.0.8
+    container_name: random_mongo_db
+    hostname: random_mongo_db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_volume:/data/configdb
+      - mongo_volume:/data/db
+
+  random_redis:
+    image: redis:7.2.4
+    container_name: random_redis
+    hostname: random_redis
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_volume:/data
+
+  random_rabbitmq:
+    image: rabbitmq:3.13.1
+    hostname: websocket_rabbitmq
+    container_name: random_rabbitmq
+    restart: always
+    env_file: ./.env
+    ports:
+      - 5672:5672
+    volumes:
+      - rabbitmq_volume:/var/lib/rabbitmq/
+      - rabbitmq_volume:/var/log/rabbitmq
+
+volumes:
+  mongo_volume:
+  postgres_volume:
+  mysql_volume:
+  redis_volume:
+  rabbitmq_volume:
