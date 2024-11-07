@@ -7,7 +7,22 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+fastapi = "^0.115.4"
+uvicorn = "^0.32.0"
+sqlalchemy = "^2.0.36"
+motor = "^3.6.0"
+pydantic-settings = "^2.6.1"
+overrides = "^7.7.0"
+passlib = "^1.7.4"
+aiomysql = "^0.2.0"
+asyncpg = "^0.30.0"
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.7.2"
+
+[tool.ruff]
+line-length = 120
 
 [build-system]
 requires = ["poetry-core"]

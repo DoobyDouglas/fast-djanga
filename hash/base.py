@@ -1,5 +1,4 @@
 class HashBase:
-
     def verify(self, plain_password, hashed_password) -> bool:
         raise NotImplementedError
 
@@ -7,5 +6,5 @@ class HashBase:
         raise NotImplementedError
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

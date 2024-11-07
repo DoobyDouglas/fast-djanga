@@ -14,5 +14,5 @@ async def get_session(
             await session.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

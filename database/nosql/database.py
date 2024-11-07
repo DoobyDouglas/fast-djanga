@@ -8,5 +8,5 @@ def get_database(
     return request.app._database
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
