@@ -1,5 +1,6 @@
-from motor.motor_asyncio import AsyncIOMotorDatabase
+from typing import Any
 from settings.base import Base
+from motor.motor_asyncio import AsyncIOMotorClient
 
 
 class NoSQLBase(Base):
@@ -8,9 +9,9 @@ class NoSQLBase(Base):
     def _get_url(self) -> str:
         raise NotImplementedError
 
-    def get_database(
+    def _create_sessionmaker(
         self,
-    ) -> AsyncIOMotorDatabase:
+    ) -> AsyncIOMotorClient | Any:
         raise NotImplementedError
 
 

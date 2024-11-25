@@ -5,4 +5,11 @@ from settings.cache.redis import RedisSettings as CacheRedisSettings
 from settings.broker.rabbitmq import RabbitMQSettings
 from settings.broker.redis import RedisSettings
 
-__all__ = ["PostgresSettings", "MySQLSettings", "MongoDBSettings", "CacheRedisSettings", "RabbitMQSettings", "RedisSettings"]
+__all__ = [
+    "PostgresSettings",
+    "MySQLSettings",
+    "MongoDBSettings",
+    "CacheRedisSettings",
+    "RabbitMQSettings",
+    "RedisSettings",
+]

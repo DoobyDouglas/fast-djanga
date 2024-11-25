@@ -3,7 +3,7 @@ up:
 run:
 	python main.py
 format:
-	ruff check
+	ruff check --fix
 	ruff format
 celery:
 	celery -A task.app:app worker -B -l info

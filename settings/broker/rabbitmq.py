@@ -19,15 +19,10 @@ class RabbitMQSettings(BrokerBase):
         )
 
     def get_broker(self) -> str:
-        return (
-            f"{self._get_url()}/{self.RABBITMQ_DEFAULT_VHOST}"
-        )
+        return f"{self._get_url()}/{self.RABBITMQ_DEFAULT_VHOST}"
 
     def get_backend(self) -> str:
         return self.RABBITMQ_BACKEND
-
-
-rabbitmq_ = RabbitMQSettings()
 
 
 if __name__ == "__main__":
