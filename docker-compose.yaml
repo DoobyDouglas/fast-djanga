@@ -50,6 +50,8 @@ services:
       - 6379:6379
     volumes:
       - redis_volume:/data
+      - ./redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
 
   random_rabbitmq:
     image: rabbitmq:3.13.1

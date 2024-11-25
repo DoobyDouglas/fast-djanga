@@ -4,9 +4,8 @@ from overrides import override
 
 
 class HashBcrypt(HashBase):
-
     def __init__(self) -> None:
-        self.context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+        self.context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
     @override
     def verify(self, plain_password, hashed_password) -> bool:
@@ -17,5 +16,5 @@ class HashBcrypt(HashBase):
         return self.context.hash(password)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

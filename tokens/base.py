@@ -1,3 +1,2 @@
 class TokenBase:
-
     pass

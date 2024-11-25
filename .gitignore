@@ -160,11 +160,11 @@ cython_debug/
 #.idea/
 
 dev/
-model/user.py
-schema/user.py
 router/
 crud/
 api/
+task/
+schema/
+model/
 main.py
-alembic/
-alembic.ini
+redis.conf
