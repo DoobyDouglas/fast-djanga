@@ -6,16 +6,28 @@ from hash.base import HashBase
 
 
 class FastDjanga(FastAPI):
-
-    def __init__(self, sql_settings: Optional[SQLBase], nosql_settings: Optional[NoSQLBase], hasher: HashBase, cruds: dict, *args, **kwargs) -> None:
+    def __init__(
+        self,
+        db_settings: Optional[SQLBase | NoSQLBase],
+        hasher: Optional[HashBase],
+        *args,
+        **kwargs,
+    ) -> None:
         super().__init__(*args, **kwargs)
-        if sql_settings:
-            self._session = sql_settings.create_sessionmaker(sql_settings.echo)
+        self.__db_settings = db_settings
+        self.__hasher = hasher
+        self.__create_sessionmaker()
+
+    @property
+    def session(self):
+        return self.__session_maker
+
+    @property
+    def hasher(self):
+        return self.__hasher
+
+    def __create_sessionmaker(self) -> None:
+        if self.__db_settings:
+            self.__session_maker = self.__db_settings._create_sessionmaker()
         else:
-            self._session = None
-        if nosql_settings:
-            self._database = nosql_settings.get_database()
-        else:
-            self._database = None
-        self.hash = hasher
-        self.crud = cruds
+            self.__session_maker = None

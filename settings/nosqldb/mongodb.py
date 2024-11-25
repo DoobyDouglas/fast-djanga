@@ -1,4 +1,4 @@
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+from motor.motor_asyncio import AsyncIOMotorClient
 from settings.nosqldb.base import NoSQLBase
 from overrides import override
 
@@ -21,10 +21,11 @@ class MongoDBSettings(NoSQLBase):
         )
 
     @override
-    def get_database(
+    def _create_sessionmaker(
         self,
-    ) -> AsyncIOMotorDatabase:
-        return AsyncIOMotorClient(self._get_url())[self.MONGO_DB]
+        echo: bool = True,
+    ) -> AsyncIOMotorClient:
+        return AsyncIOMotorClient(self._get_url())
 
 
 if __name__ == "__main__":

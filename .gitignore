@@ -166,5 +166,6 @@ api/
 task/
 schema/
 model/
+controller/
 main.py
 redis.conf
