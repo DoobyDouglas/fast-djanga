@@ -1,4 +1,4 @@
-from settings.sqldb.base import SQLBase
+from settings.database.sqldb.base import SQLBase
 from overrides import override
 
 

@@ -1,8 +1,10 @@
 from typing import Optional
 from fastapi import FastAPI
-from settings.sqldb.base import SQLBase
-from settings.nosqldb.base import NoSQLBase
+from settings.database.sqldb.base import SQLBase
+from settings.database.nosqldb.base import NoSQLBase
 from hash.base import HashBase
+from motor.motor_asyncio import AsyncIOMotorClient
+from sqlalchemy.ext.asyncio.session import async_sessionmaker
 
 
 class FastDjanga(FastAPI):
@@ -19,7 +21,11 @@ class FastDjanga(FastAPI):
         self.__create_sessionmaker()
 
     @property
-    def session(self):
+    def db_settings(self):
+        return self.__db_settings
+
+    @property
+    def session_maker(self):
         return self.__session_maker
 
     @property
@@ -27,7 +33,6 @@ class FastDjanga(FastAPI):
         return self.__hasher
 
     def __create_sessionmaker(self) -> None:
+        self.__session_maker: Optional[async_sessionmaker | AsyncIOMotorClient] = None
         if self.__db_settings:
             self.__session_maker = self.__db_settings._create_sessionmaker()
-        else:
-            self.__session_maker = None
