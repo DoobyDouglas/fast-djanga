@@ -1,31 +1,19 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Any, AsyncGenerator
 from fastapi import Request
-from sqlalchemy.ext.asyncio.session import async_sessionmaker
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorClientSession
+from motor.motor_asyncio import AsyncIOMotorClient
 
 
 async def get_session(
     request: Request,
-) -> AsyncGenerator[AsyncSession | AsyncIOMotorClientSession | None, Any]:
-    db_session = request.app.session
-    if not isinstance(db_session, (async_sessionmaker, AsyncIOMotorClient)):
+) -> AsyncGenerator[AsyncSession | AsyncIOMotorClient | None, Any]:
+    session_maker = request.app.session_maker
+    if session_maker is None:
         yield None
-    elif isinstance(db_session, async_sessionmaker):
-        sql_session: AsyncSession
-        async with db_session() as sql_session:
-            try:
-                yield sql_session
-            finally:
-                await sql_session.close()
-    elif isinstance(db_session, AsyncIOMotorClient):
-        nosql_session: AsyncIOMotorClientSession
-        async with await db_session.start_session() as nosql_session:
-            try:
-                async with nosql_session.start_transaction():
-                    yield nosql_session
-            finally:
-                await nosql_session.end_session()
+    else:
+        db_settings = request.app.db_settings
+        session = db_settings._get_session(session_maker)
+        yield await anext(session)
 
 
 if __name__ == "__main__":
